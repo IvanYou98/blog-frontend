@@ -28,7 +28,11 @@ const Single = () => {
     }, [postId])
 
     const handleDelete = async () => {
-        await axios.delete(`${BACKEND_API}/post/${post.id}`);
+        await axios.delete(`${BACKEND_API}/post/${post.id}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            }
+        });
         navigate("/");
     }
 

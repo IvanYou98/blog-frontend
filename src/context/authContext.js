@@ -19,7 +19,7 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const logout = async () => {
-        localStorage.removeItem("blog_token");
+        localStorage.removeItem("access_token");
         setCurrentUser(null);
     }
 

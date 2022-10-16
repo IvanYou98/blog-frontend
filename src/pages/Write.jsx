@@ -47,7 +47,11 @@ const Write = ({ props }) => {
             try {
                 const formData = new FormData();
                 formData.append("file", photo);
-                const res = await axios.post(`${BACKEND_API}/upload`, formData);
+                const res = await axios.post(`${BACKEND_API}/upload`, formData, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                    }
+                });
                 return res.data;
             } catch (err) {
                 console.log(err);
@@ -66,6 +70,10 @@ const Write = ({ props }) => {
                     desc: content,
                     cat: cat,
                     img: photo ? imgUrl : state.img,
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                    }
                 })
                 : await axios.post(`${BACKEND_API}/post/`, {
                     title,
@@ -73,6 +81,10 @@ const Write = ({ props }) => {
                     cat: cat,
                     img: photo ? imgUrl : "",
                     date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                    }
                 });
             navigate("/")
         } catch (err) {
