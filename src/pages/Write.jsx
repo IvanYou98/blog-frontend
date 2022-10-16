@@ -11,7 +11,7 @@ import axios from 'axios'
 import { BACKEND_API } from '../constants'
 
 
-axios.defaults.withCredentials = true
+
 
 hljs.configure({
     languages: ['javascript', 'python', 'java'],
