@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { BACKEND_API } from '../constants';
 
 const Menu = ({ cat, currPostId }) => {
     const [posts, setPosts] = useState([]);
@@ -7,7 +8,7 @@ const Menu = ({ cat, currPostId }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/post?cat=${cat}`);
+                const res = await axios.get(`${BACKEND_API}/post?cat=${cat}`);
                 console.log('current post id: ', currPostId)
                 console.log(res.data);
                 setPosts(res.data.filter(post => post.id !== currPostId));

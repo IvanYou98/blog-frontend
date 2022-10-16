@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { BACKEND_API } from '../constants'
 
 const Register = () => {
     const [inputs, setInputs] = useState({
@@ -18,7 +19,7 @@ const Register = () => {
 
     const handleRegister = e => {
         e.preventDefault();
-        axios.post('/auth/register', inputs)
+        axios.post(`${BACKEND_API}/auth/register`, inputs)
             .then(res => { navigate("/login") })
             .catch(err => { setError(err.response.data) })
     }

@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { BACKEND_API } from '../constants';
 const Home = () => {
     const [posts, setPosts] = useState([]);
     const cat = useLocation().search;
 
     useEffect(() => {
-        axios.get(`/post${cat}`)
+        axios.get(`${BACKEND_API}/post${cat}`)
             .then(res => setPosts(res.data))
     }, [cat])
 

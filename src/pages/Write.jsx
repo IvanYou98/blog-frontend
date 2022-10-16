@@ -8,6 +8,10 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import moment from "moment"
 import axios from 'axios'
+import { BACKEND_API } from '../constants'
+
+
+axios.defaults.withCredentials = true
 
 hljs.configure({
     languages: ['javascript', 'python', 'java'],
@@ -43,7 +47,7 @@ const Write = ({ props }) => {
             try {
                 const formData = new FormData();
                 formData.append("file", photo);
-                const res = await axios.post("/upload", formData);
+                const res = await axios.post(`${BACKEND_API}/upload`, formData);
                 return res.data;
             } catch (err) {
                 console.log(err);
@@ -57,13 +61,13 @@ const Write = ({ props }) => {
         const imgUrl = await upload();
         try {
             state
-                ? await axios.put(`/post/${state.id}`, {
+                ? await axios.put(`${BACKEND_API}/post/${state.id}`, {
                     title,
                     desc: content,
                     cat: cat,
                     img: photo ? imgUrl : state.img,
                 })
-                : await axios.post(`/post/`, {
+                : await axios.post(`${BACKEND_API}/post/`, {
                     title,
                     desc: content,
                     cat: cat,

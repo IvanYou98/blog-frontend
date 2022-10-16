@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { BACKEND_API } from "../constants";
 
 export const AuthContext = createContext()
 
@@ -12,12 +13,12 @@ export const AuthContextProvider = ({ children }) => {
     }, [currentUser])
 
     const login = async (inputs) => {
-        const res = await axios.post("/auth/login", inputs);
+        const res = await axios.post(`${BACKEND_API}/auth/login`, inputs);
         setCurrentUser(res.data)
     }
 
     const logout = async () => {
-        await axios.post("/auth/logout");
+        await axios.post(`${BACKEND_API}/auth/logout`);
         setCurrentUser(null);
     }
 

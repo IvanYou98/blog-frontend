@@ -10,6 +10,7 @@ import hljs from 'highlight.js'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-dark-reasonable.css'
 import ReactQuill from 'react-quill'
+import { BACKEND_API } from '../constants';
 
 
 const Single = () => {
@@ -19,7 +20,7 @@ const Single = () => {
     const postId = useLocation().pathname.split('/')[2];
     useEffect(() => {
         const fetchPost = async () => {
-            const res = await axios.get(`/post/${postId}`);
+            const res = await axios.get(`${BACKEND_API}/post/${postId}`);
             console.log(res.data);
             setPost(res.data);
         }
@@ -27,7 +28,7 @@ const Single = () => {
     }, [postId])
 
     const handleDelete = async () => {
-        await axios.delete(`/post/${post.id}`);
+        await axios.delete(`${BACKEND_API}/post/${post.id}`);
         navigate("/");
     }
 
