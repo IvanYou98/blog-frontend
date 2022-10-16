@@ -1,5 +1,4 @@
 import React from 'react'
-
 import hljs from 'highlight.js'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-dark-reasonable.css'
@@ -9,9 +8,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import moment from "moment"
 import axios from 'axios'
 import { BACKEND_API } from '../constants'
-
-
-
 
 hljs.configure({
     languages: ['javascript', 'python', 'java'],
@@ -40,36 +36,39 @@ const Write = ({ props }) => {
     const [content, setContent] = useState(state?.desc || "");
     const [title, setTitle] = useState(state?.title || "");
     const [cat, setCat] = useState(state?.cat || "")
-    const [photo, setPhoto] = useState();
+    const [img, setImg] = useState(state?.img || "")
+    // const [photo, setPhoto] = useState();
 
-    const upload = async () => {
-        if (photo) {
-            try {
-                const formData = new FormData();
-                formData.append("file", photo);
-                const res = await axios.post(`${BACKEND_API}/upload`, formData, {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-                    }
-                });
-                return res.data;
-            } catch (err) {
-                console.log(err);
-            }
-        }
-    };
+
+
+    // const upload = async () => {
+    //     if (photo) {
+    //         try {
+    //             const formData = new FormData();
+    //             formData.append("file", photo);
+    //             const res = await axios.post(`${BACKEND_API}/upload`, formData, {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+    //                 }
+    //             });
+    //             return res.data;
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+    //     }
+    // };
 
 
     const handlePublish = async (e) => {
         e.preventDefault();
-        const imgUrl = await upload();
+        // const imgUrl = await upload();
         try {
             state
                 ? await axios.put(`${BACKEND_API}/post/${state.id}`, {
                     title,
                     desc: content,
                     cat: cat,
-                    img: photo ? imgUrl : state.img,
+                    img: img
                 }, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -79,7 +78,7 @@ const Write = ({ props }) => {
                     title,
                     desc: content,
                     cat: cat,
-                    img: photo ? imgUrl : "",
+                    img: img,
                     date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
                 }, {
                     headers: {
@@ -91,7 +90,6 @@ const Write = ({ props }) => {
             console.log(err);
         }
     };
-
 
     return (
         <div className='create-post'>
@@ -120,14 +118,16 @@ const Write = ({ props }) => {
                     <span>
                         <b>Visibility:</b> Public
                     </span>
-                    <input
+                    <label htmlFor="imgUrl" className='file'>
+                        Image Url
+                    </label>
+                    <input id="imgUrl" type="text" onChange={e => setImg(e.target.value)} value={img} />
+                    {/* <input
                         style={{ display: 'none' }}
                         id="file-picker"
                         onChange={e => setPhoto(e.target.files[0])}
-                        type="file" />
-                    <label htmlFor="file-picker" className='file'>
-                        Upload Image
-                    </label>
+                        type="file" /> */}
+
                     <div className='buttons'>
                         <button>Save as a draft</button>
                         <button onClick={handlePublish}>Publish</button>

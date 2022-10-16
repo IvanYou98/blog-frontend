@@ -48,7 +48,7 @@ const Single = () => {
             {
                 post && (
                     <div className='content'>
-                        <img src={`../upload/${post.img}`} alt="" />
+                        <img src={`${post.img}`} alt="" />
                         <div className='user'>
                             <img src={post.userImg} alt="" />
                             <div className='info'>
