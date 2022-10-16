@@ -13,12 +13,13 @@ export const AuthContextProvider = ({ children }) => {
     }, [currentUser])
 
     const login = async (inputs) => {
-        const res = await axios.post(`${BACKEND_API}/auth/login`, inputs);
-        setCurrentUser(res.data)
+        const { data } = await axios.post(`${BACKEND_API}/auth/login`, inputs);
+        localStorage.setItem('access_token', data.token);
+        setCurrentUser(data)
     }
 
     const logout = async () => {
-        await axios.post(`${BACKEND_API}/auth/logout`);
+        localStorage.removeItem("blog_token");
         setCurrentUser(null);
     }
 
