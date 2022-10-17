@@ -22,6 +22,7 @@
     <li>Express.js</li>
     <li>MySQL</li>
     <li>JWT</li>
+    <li>AWS</li>
     </ul>
 </ul>
 
