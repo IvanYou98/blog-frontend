@@ -8,6 +8,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import moment from "moment"
 import axios from 'axios'
 import { BACKEND_API } from '../constants'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 
 hljs.configure({
     languages: ['javascript', 'python', 'java'],
@@ -37,6 +39,7 @@ const Write = ({ props }) => {
     const [title, setTitle] = useState(state?.title || "");
     const [cat, setCat] = useState(state?.cat || "")
     const [img, setImg] = useState(state?.img || "")
+    const [isPublishing, setIsPublishing] = useState(false);
     // const [photo, setPhoto] = useState();
 
 
@@ -62,6 +65,7 @@ const Write = ({ props }) => {
     const handlePublish = async (e) => {
         e.preventDefault();
         // const imgUrl = await upload();
+        setIsPublishing(true);
         try {
             state
                 ? await axios.put(`${BACKEND_API}/post/${state.id}`, {
@@ -85,6 +89,7 @@ const Write = ({ props }) => {
                         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
                     }
                 });
+            setIsPublishing(false);
             navigate("/")
         } catch (err) {
             console.log(err);
@@ -130,7 +135,13 @@ const Write = ({ props }) => {
 
                     <div className='buttons'>
                         <button>Save as a draft</button>
-                        <button onClick={handlePublish}>Publish</button>
+                        <button onClick={handlePublish}> {
+                            isPublishing
+                                ? <FontAwesomeIcon icon={faSpinner} className='spinner' />
+                                : "Publish"
+                        }
+
+                        </button>
                     </div>
                 </div>
                 <div className='item'>
