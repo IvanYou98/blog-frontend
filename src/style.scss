@@ -125,6 +125,10 @@ button {
         flex-direction: column;
         gap: 150px;
 
+        .spinner {
+            margin: 20px auto;
+        }
+
         .post {
             display: flex;
             gap: 100px;
@@ -334,13 +338,10 @@ button {
         }
 
         .editor-container {
-          height: 600px;
-          border: 1px solid lightgray;
-          
-
+          height: 400px;
+          overflow: scroll;
           .editor {
             height: 100%;
-            border: none;
           }
         }
       }

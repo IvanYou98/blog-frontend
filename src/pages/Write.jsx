@@ -40,31 +40,9 @@ const Write = ({ props }) => {
     const [cat, setCat] = useState(state?.cat || "")
     const [img, setImg] = useState(state?.img || "")
     const [isPublishing, setIsPublishing] = useState(false);
-    // const [photo, setPhoto] = useState();
-
-
-
-    // const upload = async () => {
-    //     if (photo) {
-    //         try {
-    //             const formData = new FormData();
-    //             formData.append("file", photo);
-    //             const res = await axios.post(`${BACKEND_API}/upload`, formData, {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-    //                 }
-    //             });
-    //             return res.data;
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     }
-    // };
-
 
     const handlePublish = async (e) => {
         e.preventDefault();
-        // const imgUrl = await upload();
         setIsPublishing(true);
         try {
             state
@@ -127,12 +105,6 @@ const Write = ({ props }) => {
                         Image Url
                     </label>
                     <input id="imgUrl" type="text" onChange={e => setImg(e.target.value)} value={img} />
-                    {/* <input
-                        style={{ display: 'none' }}
-                        id="file-picker"
-                        onChange={e => setPhoto(e.target.files[0])}
-                        type="file" /> */}
-
                     <div className='buttons'>
                         <button>Save as a draft</button>
                         <button onClick={handlePublish}> {
@@ -140,7 +112,6 @@ const Write = ({ props }) => {
                                 ? <FontAwesomeIcon icon={faSpinner} className='spinner' />
                                 : "Publish"
                         }
-
                         </button>
                     </div>
                 </div>

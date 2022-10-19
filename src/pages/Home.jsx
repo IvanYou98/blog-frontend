@@ -29,7 +29,7 @@ const Home = () => {
         <div className='home'>
             <div className='posts'>
                 {
-                    isLoading ? <CircularProgress />
+                    isLoading ? <CircularProgress className='spinner' />
                         : posts.map(post => {
                             return (
                                 <div className='post' key={post.id}>
