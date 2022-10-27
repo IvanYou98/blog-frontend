@@ -1,6 +1,7 @@
 import React from 'react'
 import hljs from 'highlight.js'
 import 'react-quill/dist/quill.snow.css'
+import 'react-quill/dist/quill.bubble.css'
 import 'highlight.js/styles/atom-one-dark-reasonable.css'
 import ReactQuill from 'react-quill'
 import { useState } from 'react'
@@ -87,7 +88,7 @@ const Write = ({ props }) => {
                         className='editor'
                         value={content}
                         onChange={setContent}
-                        theme="snow"
+                        theme="bubble"
                         modules={modules}
                     />
                 </div>
