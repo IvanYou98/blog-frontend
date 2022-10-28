@@ -36,6 +36,7 @@ const modules = {
 const Write = ({ props }) => {
     const navigate = useNavigate();
     const state = useLocation().state;
+    const [intro, setIntro] = useState(state?.intro || "");
     const [content, setContent] = useState(state?.desc || "");
     const [title, setTitle] = useState(state?.title || "");
     const [cat, setCat] = useState(state?.cat || "")
@@ -48,7 +49,8 @@ const Write = ({ props }) => {
         try {
             state
                 ? await axios.put(`${BACKEND_API}/post/${state.id}`, {
-                    title,
+                    title: title,
+                    intro: intro,
                     desc: content,
                     cat: cat,
                     img: img
@@ -58,7 +60,8 @@ const Write = ({ props }) => {
                     }
                 })
                 : await axios.post(`${BACKEND_API}/post/`, {
-                    title,
+                    title: title,
+                    intro: intro,
                     desc: content,
                     cat: cat,
                     img: img,
@@ -82,6 +85,12 @@ const Write = ({ props }) => {
                     value={title}
                     placeholder='Title'
                     onChange={e => setTitle(e.target.value)}
+                />
+                <textarea
+                    rows={4}
+                    value={intro}
+                    placeholder='Introduction'
+                    onChange={e => setIntro(e.target.value)}
                 />
                 <div className='editor-container'>
                     <ReactQuill

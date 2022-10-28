@@ -71,6 +71,7 @@ const Single = () => {
                         </div>
                         <div>
                             <h2>{post.title}</h2>
+                            <h4 style={{ fontStyle: 'italic', marginTop: '20px' }}>{post.intro}</h4>
                             <ReactQuill
                                 className='editor'
                                 value={post.desc}

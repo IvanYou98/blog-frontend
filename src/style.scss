@@ -5,6 +5,11 @@ input:focus {
     background-color: none;
 }
 
+textarea:focus {
+    outline: none;
+    background-color: none;
+}
+
 button {
     border: none;
 }
@@ -172,8 +177,8 @@ button {
                     font-size: 18px;
                     margin-bottom: 20px;
                     width: 100%;
-                    overflow: hidden;
                     text-overflow: ellipsis;
+                    overflow: hidden;
                     display: -webkit-box;
                     -webkit-line-clamp: 3; /* number of lines to show */
                             line-clamp: 3; 
@@ -335,6 +340,12 @@ button {
         input {
           padding: 10px;
           border: 1px solid lightgray;
+        }
+
+        textarea {
+            padding: 10px;
+            border: 1px solid lightgray;
+            resize: none;
         }
 
         .editor-container {
